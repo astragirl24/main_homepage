@@ -1,0 +1,599 @@
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <link rel="stylesheet" type="text/css" href="homepage.css">
+            <link rel="stylesheet" type="text/css" href="header-footer.css">
+            <!-- Thêm vào thẻ <head> -->
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+            
+
+            <!-- Thêm vào thẻ <footer> -->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        </head>
+        <body> 
+            <!--Header/Navbar-->
+            <header>
+                <nav class="navbar section-content">
+                    <div class="header-top">
+                        <a href="#" class="nav-logo">
+                        <img src="../images/shopname.jpg" width="150px" height="60px">
+                        </a>
+                        <div class="header-icons">
+                            <a href="#"><i class="fa fa-user"></i></a>
+                            <a href="#"><i class="fa fa-search"></i></a>
+                            <button class="cart-btn" id="cartButton" aria-expanded="false" aria-controls="cartModal" title="Shopping Cart">
+                                <span class="sr-only">Mở giỏ hàng</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M6 6h15l-1.5 9h-12L5 2H2" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <circle cx="9" cy="21" r="1.8" fill="#111"/><circle cx="18" cy="21" r="1.8" fill="#111"/>
+                                </svg>
+                                <span class="badge" id="cartBadge"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <ul class="nav-menu">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">AUDIO</a>
+                            <ul class="submenu">
+                                <li><a href="#" class="submenu-link">CD</a></li>
+                                <li><a href="#" class="submenu-link">VINYL</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a href="#" class="nav-link">VHS</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">CaSSETTE TAPE</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">POLA CAMERA</a></li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">ACCESSORIES</a>
+                            <ul class="submenu">
+                                <li><a href="#" class="submenu-link">CASSETTE PLAYER</a></li>
+                                <li><a href="#" class="submenu-link">IPOD</a></li>
+                                <li><a href="#" class="submenu-link">CD PLAYER</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a href="#" class="nav-link">POLA CAMERA</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">CINE ROOM</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">THREAD</a></li>
+                        
+                    </ul> 
+                </nav>
+            </header> 
+
+            <main>
+                <main>
+                    <!-- Hero Section (full width, không bị container giới hạn) -->
+                    <section class="hero-section">
+                        <div class="hero-image-wrapper">
+                            <img src="../images/main-banner.jpg" alt="Main Banner" class="main-banner">
+                        </div>
+                    </section>
+
+                    <!-- Product Banner Section (có margin 2 bên 250px) -->
+                    <section class="product-banner">
+                        <div class="grid-layout">
+                            <!-- Banner 1 (bên trái) -->
+                            <div class="left-side">
+                                <img src="../images/Banner1.jpg" alt="Banner 1">
+                            </div>
+
+                            <!-- Bên phải: Banner 2 + Banner 3 -->
+                            <div class="right-side">
+                                <div class="banner banner2">
+                                    <img src="../images/Banner2.jpg" alt="Banner 2">
+                                </div>
+                                <div class="banner banner3">
+                                    <img src="../images/Banner2.jpg" alt="Banner 3">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+            </main>
+
+            <section class="best-seller-arena">
+                <h2 style="text-align:center;">
+                    <span class="home-text">
+                        <span class="home-text">
+                            <span class="home-text">
+                                <span class="home-text">
+                                        <span class="home-text">BEST SELLERS</span>
+                                </span>
+                            </span>
+                        </span>
+                    </span>
+                </h2>
+                <div class="grid" id="productGrid">
+                <!-- Product Box 1 -->
+                    <div class="box" height="200px">
+                        <div class="item" id="sku-1" data-name="VHS 13" data-price="$90.00" data-img="../images/VHS-20251004T101836Z-1-001/VHS/13.png">
+                            <div class="thumb">
+                                <div class="hover-content">
+                                    <ul>
+                                        <li><a href="#"><i class="heart-icon"></i></a></li>
+                                        <li><button class="btn add"><i class="shopping-bag-icon"></i></button></li>
+                                    </ul>
+                                </div>
+                                <img src="../images/VHS-20251004T101836Z-1-001/VHS/13.png" alt="Air Force 1 X" class="main-image">
+                                <img src="../images/VHS-20251004T101836Z-1-001/VHS/14.png" alt="Air Force 1 X Hover" class="hover-image">
+                            </div>
+                            <div class="down-content">
+                                <h4>VHS 13</h4>
+                                <div class="product-price">
+                                    <span class="current">$90.00</span>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>
+                <!-- Product Box 2 -->
+                    <div class="box" height="200px">
+                        <div class="item" data-id="sku-1" data-name="Audio Vinyl 13" data-price="$90.00" data-img="../images/Audio-20251004T101842Z-1-001/Audio/Vinyl/13.png">
+                            <div class="thumb">
+                                <div class="hover-content">
+                                    <ul>
+                                        <li><a href="#"><i class="heart-icon"></i></a></li>
+                                        <li><button class="btn add"><i class="shopping-bag-icon"></i></button></li>
+                                    </ul>
+                                </div>
+                                <img src="../images/Audio-20251004T101842Z-1-001/Audio/Vinyl/13.png" alt="Air Force 1 X" class="main-image">
+                                <img src="../images/Audio-20251004T101842Z-1-001/Audio/Vinyl/14.png" alt="Air Force 1 X Hover" class="hover-image">
+                            </div>
+                            <div class="down-content">
+                                <h4>Audio Vinyl 13</h4>
+                                <div class="product-price">
+                                    <span class="current">$90.00</span>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>
+                <!-- Product Box 3 -->
+                    <div class="box" height="200px">
+                        <div class="item" data-id="sku-3" data-name="Cassette Tape 17" data-price="$90.00" data-img="../images/Cassette Tape-20251004T101840Z-1-001/Cassette Tape/17.png">
+                            <div class="thumb">
+                                <div class="hover-content">
+                                    <ul>
+                                        <li><a href="#"><i class="heart-icon"></i></a></li>
+                                        <li><button class="btn add"><i class="shopping-bag-icon"></i></button></li>
+                                    </ul>
+                                </div>
+                                <img src="../images/Cassette Tape-20251004T101840Z-1-001/Cassette Tape/17.png" alt="Air Force 1 X" class="main-image">
+                                <img src="../images/Cassette Tape-20251004T101840Z-1-001/Cassette Tape/18.png" alt="Air Force 1 X Hover" class="hover-image">
+                            </div>
+                            <div class="down-content">
+                                <h4>Cassette Tape 17</h4>
+                                <div class="product-price">
+                                    <span class="current">$90.00</span>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>
+                <!-- Product Box 4 -->
+                    <div class="box" height="200px">
+                        <div class="item" data-id="sku-4" data-name="Pola Camera 11" data-price="$90.00" data-img="../images/Pola Camera-20251004T101838Z-1-001/Pola Camera/11.png">
+                            <div class="thumb">
+                                <div class="hover-content">
+                                    <ul>
+                                        <li><a href="#"><i class="heart-icon"></i></a></li>
+                                        <li><button class="btn add"><i class="shopping-bag-icon"></i></button></li>
+                                    </ul>
+                                </div>
+                                <img src="../images/Pola Camera-20251004T101838Z-1-001/Pola Camera/11.png" alt="Air Force 1 X" class="main-image">
+                                <img src="../images/Pola Camera-20251004T101838Z-1-001/Pola Camera/12.png" alt="Air Force 1 X Hover" class="hover-image">
+                            </div>
+                            <div class="down-content">
+                                <h4>Pola Camera 11</h4>
+                                <div class="product-price">
+                                    <span class="current">$90.00</span>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>
+                <!-- Product Box 5 -->
+                    <div class="box" height="200px">
+                        <div class="item" data-id="sku-5" data-name="IPod 8" data-price="$90.00" data-img="../images/Accessories-20251004T101844Z-1-001/Accessories/IPod/8.png">
+                            <div class="thumb">
+                                <div class="hover-content">
+                                    <ul>
+                                        <li><a href="#"><i class="heart-icon"></i></a></li>
+                                        <li><button class="btn add"><i class="shopping-bag-icon"></i></button></li>
+                                    </ul>
+                                </div>
+                                <img src="../images/Accessories-20251004T101844Z-1-001/Accessories/IPod/8.png" alt="Air Force 1 X" class="main-image">
+                                <img src="../images/Accessories-20251004T101844Z-1-001/Accessories/IPod/9.png" alt="Air Force 1 X Hover" class="hover-image">
+                            </div>
+                            <div class="down-content">
+                                <h4>IPod 8</h4>
+                                <div class="product-price">
+                                    <span class="current">$90.00</span>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>
+                <!-- Product Box 6 -->
+                    <div class="box" height="200px">
+                        <div class="item" data-id="sku-6" data-name="CD Player 13" data-price="$90.00" data-img="../images/Accessories-20251004T101844Z-1-001/Accessories/CD Player/13.png">
+                            <div class="thumb">
+                                <div class="hover-content">
+                                    <ul>
+                                        <li><a href="#"><i class="heart-icon"></i></a></li>
+                                        <li><button class="btn add"><i class="shopping-bag-icon"></i></button></li>
+                                    </ul>
+                                </div>
+                                <img src="../images/Accessories-20251004T101844Z-1-001/Accessories/CD Player/13.png" alt="Air Force 1 X" class="main-image">
+                                <img src="../images/Accessories-20251004T101844Z-1-001/Accessories/CD Player/14.png" alt="Air Force 1 X Hover" class="hover-image">
+                            </div>
+                            <div class="down-content">
+                                <h4>CD Player 13</h4>
+                                <div class="product-price">
+                                    <span class="current">$90.00</span>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>
+                <!-- Product Box 7 -->
+                    <div class="box" height="200px">
+                        <div class="item" data-id="sku-7" data-name="Pola Camera 15" data-price="$90.00" data-img="../images/Pola Camera-20251004T101838Z-1-001/Pola Camera/15.png">
+                            <div class="thumb">
+                                <div class="hover-content">
+                                    <ul>
+                                        <li><a href="#"><i class="heart-icon"></i></a></li>
+                                        <li><button class="btn add"><i class="shopping-bag-icon"></i></button></li>
+                                    </ul>
+                                </div>
+                                <img src="../images/Pola Camera-20251004T101838Z-1-001/Pola Camera/15.png" alt="Air Force 1 X" class="main-image">
+                                <img src="../images/Pola Camera-20251004T101838Z-1-001/Pola Camera/16.png" alt="Air Force 1 X Hover" class="hover-image">
+                            </div>
+                            <div class="down-content">
+                                <h4>Pola Camera 15</h4>
+                                <div class="product-price">
+                                    <span class="current">$90.00</span>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>
+                <!-- Product Box 8 -->
+                    <div class="box" height="200px">
+                        <div class="item" data-id="sku-8" data-name="Audio Vinyl 14" data-img="../images/Audio-20251004T101842Z-1-001/Audio/Vinyl/14.png">
+                            <div class="thumb">
+                                <div class="hover-content">
+                                    <ul>
+                                        <li><a href="#"><i class="heart-icon"></i></a></li>
+                                        <li><button class="btn add"><i class="shopping-bag-icon"></i></button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <img src="../images/Audio-20251004T101842Z-1-001/Audio/Vinyl/14.png" alt="Air Force 1 X" class="main-image">
+                                <img src="../images/Audio-20251004T101842Z-1-001/Audio/Vinyl/15.png" alt="Air Force 1 X Hover" class="hover-image">
+                            </div>
+                            <div class="down-content">
+                                <h4>Audio Vinyl 14</h4>
+                                <div class="product-price">
+                                    <span class="current">$90.00</span>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>
+                <!-- Product Box 9 -->
+                    <div class="box" height="200px">
+                        <div class="item" data-id="sku-9" data-name="VHS 39" data-price="$90.00" data-img="../images/VHS-20251004T101836Z-1-001/VHS/39.png">
+                            <div class="thumb">
+                                <div class="hover-content">
+                                    <ul>
+                                        <li><a href="#"><i class="heart-icon"></i></a></li>
+                                        <button class="btn add"><i class="shopping-bag-icon"></i></button></li>
+                                    </ul>
+                                </div>
+                                <img src="../images/VHS-20251004T101836Z-1-001/VHS/39.png" alt="Air Force 1 X" class="main-image">
+                                <img src="../images/VHS-20251004T101836Z-1-001/VHS/40.png" alt="Air Force 1 X Hover" class="hover-image">
+                            </div>
+                            <div class="down-content">
+                                <h4>VHS 39</h4>
+                                <div class="product-price">
+                                    <span class="current">$90.00</span>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>
+                <!-- Product Box 10 -->
+                    <div class="box" height="200px">
+                        <div class="item" data-id="sku-10" data-name="VHS 13" data-price="$90.00" data-img="../images/VHS-20251004T101836Z-1-001/VHS/13.png">
+                            <div class="thumb">
+                                <div class="hover-content">
+                                    <ul>
+                                        <li><a href="#"><i class="heart-icon"></i></a></li>
+                                        <li><button class="btn add">+ Add to cart</button></li>
+                                    </ul>
+                                </div>
+                                <img src="../images/VHS-20251004T101836Z-1-001/VHS/13.png" alt="Air Force 1 X" class="main-image">
+                                <img src="../images/VHS-20251004T101836Z-1-001/VHS/14.png" alt="Air Force 1 X Hover" class="hover-image">
+                            </div>
+                            <div class="down-content">
+                                <h4>VHS 13</h4>
+                                <div class="product-price">
+                                    <span class="current">$90.00</span>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>
+                </div>
+            </section>
+            <div class="overlay" id="overlay" tabindex="-1" aria-hidden="true"></div>
+
+            <section class="modal" id="cartModal" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+                <div class="modal-head">
+                <div id="cartTitle" class="modal-title">GIỎ HÀNG</div>
+                    <button class="x" id="closeModal" aria-label="Đóng"></button>
+                </div>
+                <div class="modal-body" id="cartList">
+                    <div class="empty" id="emptyState">Chưa có sản phẩm.</div>
+                </div>
+                <div class="modal-foot">
+                    <div class="sum"><span>Tổng</span><span id="grandTotal">0₫</span></div>
+                    <div class="actions">
+                        <button class="btn secondary">GIỎ HÀNG</button>
+                        <button class="btn">THANH TOÁN</button>
+                    </div>
+                    <a href="#" class="continue" id="continueLink">TIẾP TỤC MUA HÀNG</a>
+                </div>
+            </section>
+
+            <div class="vaultzone">
+                <div class="artifactz vinora">
+                    <div class="titlemark">Vinyl</div>
+                    <img src="../images/cd-home2.png" alt="Vinyl Record"/>
+                    <div><a href="#" class="btn-retro">Shop Now</a></div>
+                </div>
+
+                <div class="artifactz tapella">
+                    <div class="titlemark">Cassettes</div>
+                    <div class="cd-container"> 
+                        <img src="../images/cassette-home.gif" alt="Cassette Tape">
+                    </div>
+                    <div><a href="#" class="btn-retro">Shop Now</a></div>
+                </div>
+
+                <div class="artifactz discara">
+                    <div class="titlemark">CDs</div>
+                    <img src="../images/cd-home1.png" alt="Compact Disc">
+                    <div><a href="#" class="btn-retro">Shop Now</a></div>
+                </div>
+            </div>
+
+            <main class="gallery-container">
+                <h2 style="text-align:center;">
+                    <span class="home-text">
+                        <span class="home-text">
+                            <span class="home-text">
+                                <span class="home-text">
+                                        <span class="home-text">NEW ARRIVALS</span>
+                                </span>
+                            </span>
+                        </span>
+                    </span>
+                </h2>
+            <div class="slider" style="
+                --width: 180px; 
+                --height:180px;
+                --quantity: 10;
+            ">
+                <div class="list">
+                    <div class="item" style="--position: 1"><a href=""><img src="../images/Pola Camera-20251004T101838Z-1-001/Pola Camera/1.png" alt=""></a></div>
+                    <div class="item" style="--position: 2"><img src="../images/Audio-20251004T101842Z-1-001/Audio/Vinyl/14.png" alt=""></div>
+                    <div class="item" style="--position: 3"><img src="../images/Cassette Tape-20251004T101840Z-1-001/Cassette Tape/15.png" alt=""></div>
+                    <div class="item" style="--position: 4"><img src="../images/VHS-20251004T101836Z-1-001/VHS/6.png" alt=""></div>
+                    <div class="item" style="--position: 5"><img src="../images/Cassette Tape-20251004T101840Z-1-001/Cassette Tape/1.png" alt=""></div>
+                    <div class="item" style="--position: 6"><img src="../images/Audio-20251004T101842Z-1-001/Audio/CDs/6.png" alt=""></div>
+                    <div class="item" style="--position: 7"><img src="../images/Pola Camera-20251004T101838Z-1-001/Pola Camera/2.png" alt=""></div>
+                    <div class="item" style="--position: 8"><img src="../images/VHS-20251004T101836Z-1-001/VHS/17.png" alt=""></div>
+                    <div class="item" style="--position: 9"><img src="../images/Cassette Tape-20251004T101840Z-1-001/Cassette Tape/8.png" alt=""></div>
+                    <div class="item" style="--position: 10"><img src="../images/Audio-20251004T101842Z-1-001/Audio/CDs/18.png" alt=""></div>
+                </div>
+            </div>
+
+            <div class="slider slider-offset" style="
+                --width: 180px;
+                --height: 180px;
+                --quantity: 10;
+            ">
+                <div class="list">
+                    <div class="item" style="--position: 1"><img src="../images/Cassette Tape-20251004T101840Z-1-001/Cassette Tape/1.png" alt=""></div>
+                    <div class="item" style="--position: 2"><img src="../images/Accessories-20251004T101844Z-1-001/Accessories/CD Player/1.png" alt=""></div>
+                    <div class="item" style="--position: 3"><img src="../images/Accessories-20251004T101844Z-1-001/Accessories/IPod/1.png" alt=""></div>
+                    <div class="item" style="--position: 4"><img src="../images/Accessories-20251004T101844Z-1-001/Accessories/CassettePlayer/16.png" alt=""></div>
+                    <div class="item" style="--position: 5"><img src="../images/Audio-20251004T101842Z-1-001/Audio/CDs/19.png" alt=""></div>
+                    <div class="item" style="--position: 6"><img src="../images/Cassette Tape-20251004T101840Z-1-001/Cassette Tape/19.png" alt=""></div>
+                    <div class="item" style="--position: 7"><img src="../images/Cassette Tape-20251004T101840Z-1-001/Cassette Tape/15.png" alt=""></div>
+                    <div class="item" style="--position: 8"><img src="../images/Pola Camera-20251004T101838Z-1-001/Pola Camera/10.png" alt=""></div>
+                    <div class="item" style="--position: 9"><img src="../images/Pola Camera-20251004T101838Z-1-001/Pola Camera/17.png" alt=""></div>
+                    <div class="item" style="--position: 10"><img src="../images/VHS-20251004T101836Z-1-001/VHS/20.png" alt=""></div>
+                </div>
+            </div>
+        </main>
+
+            <div class="wrapper">
+                <div class="footer-gallery">
+                    <input type="radio" name="slide" id="c1" checked>
+                    <label for="c1" class="card">
+                    </label>
+                    <input type="radio" name="slide" id="c2" checked>
+                    <label for="c2" class="card">
+                    </label>
+                    <input type="radio" name="slide" id="c3" checked>
+                    <label for="c3" class="card">
+                    </label>
+                    <input type="radio" name="slide" id="c4" checked>
+                    <label for="c4" class="card">
+                    </label>
+                    <input type="radio" name="slide" id="c5" checked>
+                    <label for="c5" class="card">
+                    </label>
+                </div>
+            </div>
+            <div class="footerContainer">
+                <div class="socialIcons">
+                    <a href=""><i class="fa-brands fa-facebook"></i></a>
+                    <a href=""><i class="fa-brands fa-instagram"></i></a>
+                    <a href=""><i class="fa-brands fa-twitter"></i></a>
+                    <a href=""><i class="fa-brands fa-google-plus"></i></a>
+                    <a href=""><i class="fa-brands fa-youtube"></i></a>
+                </div>
+                <div class="footerNav">
+                    <ul>
+                        <li><a href="">HOME</a></li>
+                        <li><a href="">NEWS</a></li>
+                        <li><a href="">PRODUCTS</a></li>
+                        <li><a href="">CONTACT US</a></li>
+                        <li><a href="">OUR TEAM</a></li>
+                    </ul>
+                </div>
+                <div class="footerBottom">
+                    <p>Copyright &copy;2025; Designed by <span class="designer">Nhóm</span></p>
+                </div>
+            </div>
+            <script>
+const $ = (s, c = document) => c.querySelector(s);
+const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
+
+const els = {
+    grid: $('#productGrid'),
+    badge: $('#cartBadge'),
+    btn: $('#cartButton'),
+    overlay: $('#overlay'),
+    modal: $('#cartModal'),
+    close: $('#closeModal'),
+    list: $('#cartList'),
+    empty: $('#emptyState'),
+    total: $('#grandTotal'),
+    cont: $('#continueLink')
+};
+
+const fmt = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND', maximumFractionDigits: 0 });
+const state = { items: [] };
+
+function openModal() {
+    els.overlay.classList.add('show');
+    els.modal.classList.add('show');
+    els.btn.setAttribute('aria-expanded', 'true');
+    setTimeout(() => els.close.focus(), 0);
+}
+
+function closeModal() {
+    els.overlay.classList.remove('show');
+    els.modal.classList.remove('show');
+    els.btn.setAttribute('aria-expanded', 'false');
+    els.btn.focus();
+}
+
+function updateBadge() {
+    const n = state.items.reduce((s, i) => s + i.qty, 0);
+    els.badge.textContent = n;
+    els.badge.classList.toggle('show', n > 0);
+}
+
+function render() {
+    els.list.innerHTML = '';
+    if (state.items.length === 0) {
+        els.list.appendChild(els.empty);
+        els.empty.style.display = 'block';
+    } else {
+        els.empty.style.display = 'none';
+        state.items.forEach(it => {
+            const row = document.createElement('div');
+            row.className = 'line';
+            row.innerHTML = `
+                <img src="${it.img}" alt="${it.name}" width="72" height="72" style="border-radius:8px; object-fit:cover">
+                <div>
+                    <h4>${it.name}</h4>
+                    <div class="muted-sm">${fmt.format(it.price)}</div>
+                    <button class="remove" data-id="${it.id}">Xóa</button>
+                </div>
+                <div style="display:grid; gap:6px; justify-items:end">
+                    <div class="qty" role="group" aria-label="Số lượng">
+                        <button class="dec" data-id="${it.id}" aria-label="Giảm">−</button>
+                        <input type="text" inputmode="numeric" value="${it.qty}" aria-label="Số lượng hiện tại">
+                        <button class="inc" data-id="${it.id}" aria-label="Tăng">+</button>
+                    </div>
+                    <div class="line-total">${fmt.format(it.price * it.qty)}</div>
+                </div>
+            `;
+            els.list.appendChild(row);
+        });
+    }
+    const total = state.items.reduce((s, i) => s + i.price * i.qty, 0);
+    els.total.textContent = fmt.format(total);
+    updateBadge();
+}
+
+function add(prod) {
+    const ex = state.items.find(i => i.id === prod.id);
+    if (ex) ex.qty += 1;
+    else state.items.push({ ...prod, qty: 1 });
+    render();
+    openModal(); // Open modal after adding product
+}
+
+function setQty(id, qty) {
+    const it = state.items.find(i => i.id === id);
+    if (!it) return;
+    it.qty = Math.max(1, Math.min(999, Number(qty) || 1));
+    render();
+}
+
+function removeItem(id) {
+    state.items = state.items.filter(i => i.id !== id);
+    render();
+}
+
+// Fix here: changing .card to .box
+els.grid.addEventListener('click', e => {
+    const btn = e.target.closest('.add');
+    if (!btn) return;
+    const item = e.target.closest('.item');  // <-- SỬA THÀNH .item
+    if (!item) return;
+    
+    // Lấy giá trị với fallback
+    const price = item.dataset.price ? Number(item.dataset.price.replace('$', '')) * 23000 : 2070000; // Mặc định 90$ ≈ 2,070,000 VND
+    const img = item.dataset.img || item.querySelector('img.main-image').src;
+    
+    add({
+        id: item.dataset.id,
+        name: item.dataset.name,
+        price: price,
+        img: img
+    });
+});
+
+els.btn.addEventListener('click', openModal);
+els.overlay.addEventListener('click', closeModal);
+els.close.addEventListener('click', closeModal);
+els.cont.addEventListener('click', (e) => {
+    e.preventDefault();
+    closeModal();
+});
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+});
+els.list.addEventListener('click', e=>{
+      const t = e.target;
+      if(t.classList.contains('inc')) setQty(t.dataset.id, (state.items.find(i=>i.id===t.dataset.id)?.qty||1)+1);
+      if(t.classList.contains('dec')) setQty(t.dataset.id, (state.items.find(i=>i.id===t.dataset.id)?.qty||1)-1);
+      if(t.classList.contains('remove')) removeItem(t.dataset.id);
+    });
+els.list.addEventListener('input', e => {
+    const inp = e.target;
+    if (inp.tagName !== 'INPUT') return;
+    const row = inp.closest('.line');
+    const id = row.querySelector('.inc').dataset.id;
+    const newQty = inp.value.replace(/\D/g, ''); // Remove non-numeric characters
+    setQty(id, newQty);
+});
+
+render();
+
+            </script>
+            </body>
+    </html>
