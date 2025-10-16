@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LDIE Zone - Checkout</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="checkout.css" />
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <header class="site-header">
+        <div class="branding">
+          <span class="brand-emblem">✶</span>
+          <div class="brand-text">
+            <span class="brand-title">LDIE</span>
+            <span class="brand-subtitle">ZONE</span>
+          </div>
+        </div>
+        <nav class="site-nav">
+          <a href="#">Home</a>
+          <a href="#">Products</a>
+          <a href="#">Contact</a>
+          <a href="#">Our Team</a>
+        </nav>
+      </header>
+
+      <main class="checkout-layout">
+        <section class="checkout-panel glass-panel">
+          <div class="panel-header">
+            <h1>Checkout</h1>
+            <p class="panel-subtitle">Customer Info</p>
+          </div>
+          <form class="checkout-form" autocomplete="on">
+            <label class="floating-label">
+              <span>Họ &amp; Tên</span>
+              <input type="text" name="fullName" placeholder="Nhập họ tên" />
+            </label>
+            <label class="floating-label">
+              <span>Email</span>
+              <input type="email" name="email" placeholder="name@example.com" />
+            </label>
+            <label class="floating-label">
+              <span>Số điện thoại</span>
+              <input type="tel" name="phone" placeholder="(+84) 0123 456 789" />
+            </label>
+            <label class="floating-label">
+              <span>Địa chỉ</span>
+              <input type="text" name="address" placeholder="Số nhà, đường, phường" />
+            </label>
+
+            <div class="form-section">
+              <p class="section-title">Shipping Method</p>
+              <label class="custom-radio">
+                <input
+                  type="radio"
+                  name="shipping"
+                  value="33000"
+                  data-label="Standard Shipping"
+                  checked
+                />
+                <span class="radio-indicator"></span>
+                <span class="radio-text">
+                  <span class="radio-label">Standard Shipping</span>
+                  <span class="radio-price">33.000 VND</span>
+                </span>
+              </label>
+              <label class="custom-radio">
+                <input
+                  type="radio"
+                  name="shipping"
+                  value="55000"
+                  data-label="Express Shipping"
+                />
+                <span class="radio-indicator"></span>
+                <span class="radio-text">
+                  <span class="radio-label">Express Shipping</span>
+                  <span class="radio-price">55.000 VND</span>
+                </span>
+              </label>
+            </div>
+
+            <div class="form-section">
+              <p class="section-title">Payment</p>
+              <label class="custom-radio inline">
+                <input type="radio" name="payment" value="cod" checked />
+                <span class="radio-indicator"></span>
+                <span class="radio-text">
+                  <span class="radio-label">Cash On Delivery (COD)</span>
+                </span>
+              </label>
+              <label class="custom-radio inline">
+                <input type="radio" name="payment" value="card" />
+                <span class="radio-indicator"></span>
+                <span class="radio-text">
+                  <span class="radio-label">Credit / Debit Card</span>
+                </span>
+              </label>
+            </div>
+
+            <label class="floating-label">
+              <span>Mã giảm giá hoặc ghi chú</span>
+              <textarea
+                name="notes"
+                rows="3"
+                placeholder="Ghi chú cho đơn hàng hoặc nhập mã giảm giá"
+              ></textarea>
+            </label>
+          </form>
+
+          <div class="qr-wrapper">
+            <div class="qr-code" aria-label="QR code for mobile checkout"></div>
+            <p class="qr-caption">Quét mã để tiếp tục thanh toán trên điện thoại</p>
+          </div>
+        </section>
+
+        <section class="summary-panel glass-panel">
+          <header class="panel-header">
+            <h2>Order Summary</h2>
+          </header>
+          <div class="order-items">
+            <article class="order-item" data-price="200000">
+              <img src="images/cd-home1.png" alt="Mac DeMarco Salad Days CD" />
+              <div class="item-info">
+                <h3>Mac DeMarco - Salad Days CD</h3>
+                <div class="item-meta">
+                  <span class="unit-price">200.000 VND</span>
+                  <div class="quantity-control" data-label="Mac DeMarco - Salad Days CD">
+                    <button type="button" class="qty-btn" data-direction="decrease">-</button>
+                    <input type="number" min="1" value="1" aria-label="Quantity" />
+                    <button type="button" class="qty-btn" data-direction="increase">+</button>
+                  </div>
+                </div>
+              </div>
+              <button class="remove-item" type="button">Remove</button>
+            </article>
+
+            <article class="order-item" data-price="200000">
+              <img src="images/cd-home2.png" alt="Salad Days Cassette" />
+              <div class="item-info">
+                <h3>Mac DeMarco - Salad Days Cassette</h3>
+                <div class="item-meta">
+                  <span class="unit-price">200.000 VND</span>
+                  <div class="quantity-control" data-label="Mac DeMarco - Salad Days Cassette">
+                    <button type="button" class="qty-btn" data-direction="decrease">-</button>
+                    <input type="number" min="1" value="1" aria-label="Quantity" />
+                    <button type="button" class="qty-btn" data-direction="increase">+</button>
+                  </div>
+                </div>
+              </div>
+              <button class="remove-item" type="button">Remove</button>
+            </article>
+          </div>
+
+          <div class="discount-box">
+            <label for="discountCode">Discount code or gift card</label>
+            <div class="discount-input">
+              <input
+                type="text"
+                id="discountCode"
+                name="discountCode"
+                placeholder="Enter code"
+                autocomplete="off"
+              />
+              <button type="button" id="applyDiscount">Apply</button>
+            </div>
+            <p class="discount-feedback" role="status" aria-live="polite"></p>
+          </div>
+
+          <dl class="summary-totals">
+            <div class="summary-row">
+              <dt>Tổng tiền hàng</dt>
+              <dd id="subtotalValue">0 VND</dd>
+            </div>
+            <div class="summary-row">
+              <dt>Shipping</dt>
+              <dd id="shippingValue">0 VND</dd>
+            </div>
+            <div class="summary-row discount-row hidden">
+              <dt>Discount</dt>
+              <dd id="discountValue">-0 VND</dd>
+            </div>
+            <div class="summary-row grand-total">
+              <dt>Thành tiền</dt>
+              <dd id="totalValue">0 VND</dd>
+            </div>
+          </dl>
+
+          <button type="button" class="pay-button" id="payNow">Pay Now</button>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <nav class="footer-nav">
+          <a href="#">Home</a>
+          <a href="#">Products</a>
+          <a href="#">Contact</a>
+          <a href="#">Our Team</a>
+        </nav>
+        <p class="copyright">©2025. Designed by NHƠN</p>
+      </footer>
+    </div>
+
+    <script src="checkout.js" defer></script>
+  </body>
+</html>
