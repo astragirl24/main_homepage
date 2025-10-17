@@ -16,7 +16,38 @@
                 
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         </head>
-        <body> 
+        <body>
+            <div class="loading-portal" id="loadingPortal" role="alert" aria-live="assertive" aria-hidden="true">
+                <div class="loading-shell" role="status">
+                    <div class="loading-vinyl" data-fast-forward>
+                        <div class="vinyl-center">
+                            <span>Retro</span>
+                            <span>Queue</span>
+                        </div>
+                        <span class="vinyl-spark"></span>
+                    </div>
+                    <div class="loading-countdown">
+                        <span class="count" data-countdown>3</span>
+                        <span class="label">giây còn lại</span>
+                    </div>
+                    <div class="loading-progress">
+                        <div class="progress-track">
+                            <div class="progress-bar" data-progress style="--progress:0"></div>
+                        </div>
+                        <div class="progress-eq" aria-hidden="true">
+                            <span data-eq-bar></span>
+                            <span data-eq-bar></span>
+                            <span data-eq-bar></span>
+                            <span data-eq-bar></span>
+                            <span data-eq-bar></span>
+                        </div>
+                    </div>
+                    <p class="loading-message" data-message>Đang xử lý yêu cầu...</p>
+                    <p class="loading-fact" data-fact>Đang làm ấm đèn âm ly để giữ chất âm chuẩn analog.</p>
+                    <p class="loading-tip" data-tip>Nhấn phím F để tua nhanh hoặc chạm vào đĩa vinyl phát sáng.</p>
+                    <button type="button" class="loading-skip" data-action="skip">Bỏ qua hiệu ứng</button>
+                </div>
+            </div>
             <!--Header/Navbar-->
             <header>
                 <nav class="navbar section-content">
@@ -508,14 +539,210 @@ const els = {
 const fmt = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND', maximumFractionDigits: 0 });
 const state = { items: [] };
 
+const loadingPortal = (() => {
+    const root = $('#loadingPortal');
+    if (!root) {
+        return {
+            play: ({ after } = {}) => {
+                after?.();
+                return Promise.resolve();
+            },
+            cancel: () => {},
+            fastForward: () => {},
+            isActive: () => false
+        };
+    }
+
+    const countdownEl = root.querySelector('[data-countdown]');
+    const messageEl = root.querySelector('[data-message]');
+    const factEl = root.querySelector('[data-fact]');
+    const tipEl = root.querySelector('[data-tip]');
+    const progressEl = root.querySelector('[data-progress]');
+    const skipBtn = root.querySelector('[data-action="skip"]');
+    const vinyl = root.querySelector('[data-fast-forward]');
+    const eqBars = Array.from(root.querySelectorAll('[data-eq-bar]'));
+
+    const factGroups = {
+        default: [
+            'Đang làm ấm đèn âm ly để giữ chất âm chuẩn analog.',
+            'Căn chỉnh đầu từ để từng dải tần vang lên chuẩn xác.',
+            'Tra dầu bánh răng máy phát để vòng quay mượt hơn.',
+            'Tinh chỉnh tiếng rè nền cho đúng vibe retro.'
+        ],
+        travel: [
+            'Đang gấp poster neon để mang sang trang mới.',
+            'Chuyển băng qua máy tua nhanh trước khi mở cảnh tiếp theo.',
+            'Bật đèn bảng hiệu chào mừng bạn ở không gian kế tiếp.',
+            'Xếp cassette vào vali du hành thời gian của Retro Sound.'
+        ],
+        cart: [
+            'Kiểm tra từng cuộn băng trước khi cho vào giỏ của bạn.',
+            'Niêm phong tem chống ẩm để bảo vệ âm thanh nguyên bản.',
+            'Đo lại độ từ tính để bảo đảm chất lượng thu âm hoàn hảo.',
+            'Ghi chú thủ công để bạn không bỏ lỡ câu chuyện của sản phẩm.'
+        ]
+    };
+
+    let totalMs = 0;
+    let elapsedMs = 0;
+    let timerId = null;
+    let speed = 1;
+    let resolver = null;
+    let theme = 'default';
+    let lastCountdown = 0;
+
+    function pickFact() {
+        const pool = factGroups[theme] || factGroups.default;
+        return pool[Math.floor(Math.random() * pool.length)];
+    }
+
+    function setProgress(value) {
+        if (!progressEl) return;
+        const safe = Math.min(Math.max(value, 0), 1);
+        progressEl.style.setProperty('--progress', safe.toFixed(3));
+    }
+
+    function updateEq() {
+        if (!eqBars.length) return;
+        eqBars.forEach((bar, index) => {
+            const base = index % 2 === 0 ? 32 : 26;
+            const max = index % 2 === 0 ? 70 : 60;
+            const height = base + Math.random() * (max - base);
+            bar.style.setProperty('--h', `${height}%`);
+        });
+    }
+
+    function finish() {
+        if (!root.classList.contains('active')) return;
+        clearInterval(timerId);
+        timerId = null;
+        setProgress(1);
+        if (countdownEl) countdownEl.textContent = '0';
+        if (factEl) factEl.textContent = 'Hoàn tất! Cùng thưởng thức nào.';
+        root.classList.remove('active', 'turbo');
+        root.setAttribute('aria-hidden', 'true');
+        setTimeout(() => {
+            setProgress(0);
+            updateEq();
+            speed = 1;
+            elapsedMs = 0;
+            lastCountdown = 0;
+        }, 320);
+        const done = resolver;
+        resolver = null;
+        done?.();
+    }
+
+    function loop() {
+        clearInterval(timerId);
+        timerId = setInterval(() => {
+            elapsedMs += 120 * speed;
+            const ratio = Math.min(1, elapsedMs / totalMs);
+            setProgress(ratio);
+            updateEq();
+            const remainingMs = Math.max(0, totalMs - elapsedMs);
+            const countdown = Math.max(0, Math.ceil(remainingMs / 1000));
+            if (countdown !== lastCountdown) {
+                lastCountdown = countdown;
+                if (countdownEl) countdownEl.textContent = countdown;
+                if (countdown > 0 && factEl) factEl.textContent = pickFact();
+            }
+            if (ratio >= 1) {
+                finish();
+            }
+        }, 120);
+    }
+
+    function play(options = {}) {
+        const { seconds = 3, message, factType = 'default', after } = options;
+        if (!root) {
+            after?.();
+            return Promise.resolve();
+        }
+        theme = factGroups[factType] ? factType : 'default';
+        totalMs = Math.max(1600, seconds * 1000);
+        elapsedMs = 0;
+        speed = 1;
+        lastCountdown = Math.ceil(totalMs / 1000);
+        if (countdownEl) countdownEl.textContent = lastCountdown;
+        if (messageEl) messageEl.textContent = message || 'Đang xử lý yêu cầu...';
+        if (factEl) factEl.textContent = pickFact();
+        if (tipEl) tipEl.textContent = 'Nhấn phím F để tua nhanh hoặc chạm vào đĩa vinyl phát sáng.';
+        root.classList.remove('turbo');
+        root.classList.add('active');
+        root.setAttribute('aria-hidden', 'false');
+        updateEq();
+        setProgress(0);
+
+        return new Promise((resolve) => {
+            resolver = () => {
+                after?.();
+                resolve();
+            };
+            loop();
+        });
+    }
+
+    function fastForward() {
+        if (!root.classList.contains('active')) return;
+        speed = Math.min(speed + 1.5, 6);
+        root.classList.add('turbo');
+        if (messageEl) messageEl.textContent = `Chế độ tua nhanh x${speed.toFixed(1)}`;
+        if (factEl) factEl.textContent = 'Băng từ đang quay vun vút!';
+        if (tipEl) tipEl.textContent = 'Nhấn ESC để bỏ qua hoặc giữ F để tăng tốc.';
+    }
+
+    function cancel() {
+        if (!root.classList.contains('active')) return;
+        if (factEl) factEl.textContent = 'Đã bỏ qua hiệu ứng.';
+        finish();
+    }
+
+    skipBtn?.addEventListener('click', (event) => {
+        event.preventDefault();
+        cancel();
+    });
+
+    vinyl?.addEventListener('click', (event) => {
+        event.preventDefault();
+        fastForward();
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (!root.classList.contains('active')) return;
+        const key = event.key.toLowerCase();
+        if (key === 'f') {
+            event.preventDefault();
+            fastForward();
+        }
+        if (key === 'escape') {
+            event.preventDefault();
+            cancel();
+        }
+    });
+
+    root.addEventListener('pointermove', () => {
+        if (root.classList.contains('active')) updateEq();
+    });
+
+    return {
+        play,
+        cancel,
+        fastForward,
+        isActive: () => root.classList.contains('active')
+    };
+})();
+
 function openModal() {
+    if (!els.overlay || !els.modal || !els.btn || !els.close) return;
     els.overlay.classList.add('show');
     els.modal.classList.add('show');
     els.btn.setAttribute('aria-expanded', 'true');
-    setTimeout(() => els.close.focus(), 0);
+    setTimeout(() => els.close?.focus(), 0);
 }
 
 function closeModal() {
+    if (!els.overlay || !els.modal || !els.btn) return;
     els.overlay.classList.remove('show');
     els.modal.classList.remove('show');
     els.btn.setAttribute('aria-expanded', 'false');
@@ -523,19 +750,23 @@ function closeModal() {
 }
 
 function updateBadge() {
-    const n = state.items.reduce((s, i) => s + i.qty, 0);
+    if (!els.badge) return;
+    const n = state.items.reduce((sum, item) => sum + item.qty, 0);
     els.badge.textContent = n;
     els.badge.classList.toggle('show', n > 0);
 }
 
 function render() {
+    if (!els.list || !els.total) return;
     els.list.innerHTML = '';
     if (state.items.length === 0) {
-        els.list.appendChild(els.empty);
-        els.empty.style.display = 'block';
+        if (els.empty) {
+            els.empty.style.display = 'block';
+            els.list.appendChild(els.empty);
+        }
     } else {
-        els.empty.style.display = 'none';
-        state.items.forEach(it => {
+        if (els.empty) els.empty.style.display = 'none';
+        state.items.forEach((it) => {
             const row = document.createElement('div');
             row.className = 'line';
             row.innerHTML = `
@@ -557,74 +788,135 @@ function render() {
             els.list.appendChild(row);
         });
     }
-    const total = state.items.reduce((s, i) => s + i.price * i.qty, 0);
+    const total = state.items.reduce((sum, item) => sum + item.price * item.qty, 0);
     els.total.textContent = fmt.format(total);
     updateBadge();
 }
 
 function add(prod) {
-    const ex = state.items.find(i => i.id === prod.id);
-    if (ex) ex.qty += 1;
-    else state.items.push({ ...prod, qty: 1 });
-    render();
-    openModal(); // Open modal after adding product
+    const productName = prod.name || 'sản phẩm';
+    loadingPortal.play({
+        seconds: 3.2,
+        message: `Đang tua băng để thêm “${productName}” vào giỏ...`,
+        factType: 'cart',
+        after: () => {
+            const existing = state.items.find((item) => item.id === prod.id);
+            if (existing) existing.qty += 1;
+            else state.items.push({ ...prod, qty: 1 });
+            render();
+            openModal();
+        }
+    });
 }
 
 function setQty(id, qty) {
-    const it = state.items.find(i => i.id === id);
-    if (!it) return;
-    it.qty = Math.max(1, Math.min(999, Number(qty) || 1));
+    const item = state.items.find((it) => it.id === id);
+    if (!item) return;
+    item.qty = Math.max(1, Math.min(999, Number(qty) || 1));
     render();
 }
 
 function removeItem(id) {
-    state.items = state.items.filter(i => i.id !== id);
+    state.items = state.items.filter((it) => it.id !== id);
     render();
 }
 
-// Fix here: changing .card to .box
-els.grid.addEventListener('click', e => {
-    const btn = e.target.closest('.add');
+const loadingLinks = [
+    ...$$('.nav-menu > li > a.nav-link'),
+    ...$$('.nav-menu .submenu-link'),
+    ...$$('.header-icons a'),
+    ...$$('.footerNav a'),
+    ...$$('.socialIcons a'),
+    $('.story .text-link')
+].filter(Boolean);
+
+loadingLinks.forEach((link) => {
+    link.dataset.loadingTrigger = 'true';
+    if (!link.dataset.loadingMessage) {
+        const label = link.textContent?.trim();
+        link.dataset.loadingMessage = label ? `Đang chuẩn bị "${label}"...` : 'Đang chuyển trang...';
+    }
+    link.dataset.loadingSeconds = link.dataset.loadingSeconds || (link.classList.contains('text-link') ? '2.4' : '2.8');
+    link.dataset.loadingTheme = link.dataset.loadingTheme || 'travel';
+});
+
+document.addEventListener('click', (event) => {
+    const trigger = event.target.closest('[data-loading-trigger]');
+    if (!trigger) return;
+    if (trigger.dataset.loadingDisabled === 'true') return;
+    const href = trigger.getAttribute('href');
+    const seconds = parseFloat(trigger.dataset.loadingSeconds) || 2.6;
+    const message = trigger.dataset.loadingMessage || 'Đang chuyển trang...';
+    const factType = trigger.dataset.loadingTheme || 'travel';
+
+    if (!href || href === '#') {
+        event.preventDefault();
+        loadingPortal.play({ seconds, message, factType });
+        return;
+    }
+
+    event.preventDefault();
+    loadingPortal.play({
+        seconds,
+        message,
+        factType,
+        after: () => {
+            window.location.href = href;
+        }
+    });
+});
+
+els.grid?.addEventListener('click', (event) => {
+    const btn = event.target.closest('.add');
     if (!btn) return;
-    const item = e.target.closest('.item');  // <-- SỬA THÀNH .item
+    const item = event.target.closest('.item');
     if (!item) return;
-    
-    // Lấy giá trị với fallback
-    const price = item.dataset.price ? Number(item.dataset.price.replace('$', '')) * 23000 : 2070000; // Mặc định 90$ ≈ 2,070,000 VND
-    const img = item.dataset.img || item.querySelector('img.main-image').src;
-    const fallbackId = item.dataset.id || item.id || item.dataset.name || img;
+
+    const rawPrice = item.dataset.price ? parseFloat(item.dataset.price.replace(/[^0-9.]/g, '')) : 90;
+    const price = Math.round(rawPrice * 23000);
+    const img = item.dataset.img || item.querySelector('img.main-image')?.src;
+    const fallbackId = item.dataset.id || item.id || item.dataset.name || img || `sku-${Date.now()}`;
 
     add({
         id: String(fallbackId),
-        name: item.dataset.name,
-        price: price,
-        img: img
+        name: item.dataset.name || item.querySelector('h4')?.textContent?.trim() || 'Sản phẩm',
+        price,
+        img
     });
 });
 
-els.btn.addEventListener('click', openModal);
-els.overlay.addEventListener('click', closeModal);
-els.close.addEventListener('click', closeModal);
-els.cont.addEventListener('click', (e) => {
-    e.preventDefault();
-    closeModal();
+els.btn?.addEventListener('click', () => {
+    if (!loadingPortal.isActive()) openModal();
 });
 
-document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeModal();
+els.overlay?.addEventListener('click', closeModal);
+els.close?.addEventListener('click', closeModal);
+els.cont?.addEventListener('click', (event) => {
+    event.preventDefault();
+    if (!loadingPortal.isActive()) closeModal();
 });
-els.list.addEventListener('click', e=>{
-      const t = e.target;
-      if(t.classList.contains('inc')) setQty(t.dataset.id, (state.items.find(i=>i.id===t.dataset.id)?.qty||1)+1);
-      if(t.classList.contains('dec')) setQty(t.dataset.id, (state.items.find(i=>i.id===t.dataset.id)?.qty||1)-1);
-      if(t.classList.contains('remove')) removeItem(t.dataset.id);
-    });
-els.list.addEventListener('input', e => {
-    const inp = e.target;
-    if (inp.tagName !== 'INPUT') return;
-    const row = inp.closest('.line');
-    const id = row.querySelector('.inc').dataset.id;
-    const newQty = inp.value.replace(/\D/g, ''); // Remove non-numeric characters
+
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && !loadingPortal.isActive()) {
+        closeModal();
+    }
+});
+
+els.list?.addEventListener('click', (event) => {
+    const target = event.target;
+    if (target.classList.contains('inc')) setQty(target.dataset.id, (state.items.find((i) => i.id === target.dataset.id)?.qty || 1) + 1);
+    if (target.classList.contains('dec')) setQty(target.dataset.id, (state.items.find((i) => i.id === target.dataset.id)?.qty || 1) - 1);
+    if (target.classList.contains('remove')) removeItem(target.dataset.id);
+});
+
+els.list?.addEventListener('input', (event) => {
+    const input = event.target;
+    if (input.tagName !== 'INPUT') return;
+    const row = input.closest('.line');
+    if (!row) return;
+    const id = row.querySelector('.inc')?.dataset.id;
+    if (!id) return;
+    const newQty = input.value.replace(/\D/g, '');
     setQty(id, newQty);
 });
 
