@@ -111,11 +111,17 @@ body {
 }
 
 .header-icons a {
-  color: #fff;
-  text-decoration: none;
-  transition: color 0.3s ease;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border:1px solid #e5e7eb;
+  background:#fff;
+  cursor:pointer
 }
-
 .header-icons a:hover {
   color: #a8a8a8;
 }
