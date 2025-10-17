@@ -59,7 +59,11 @@
                         <li class="nav-item"><a href="#" class="nav-link">CINE ROOM</a></li>
                         <li class="nav-item"><a href="#" class="nav-link">THREAD</a></li>
                         
-                    </ul> 
+                        
+                        <a href="#"><i class="user-icon"></i></a>
+                        <a href="#"><i class="search-icon"></i></a>
+                        <a href="#"><i class="cart-icon"></i></a>
+                    </ul>
                 </nav>
             </header> 
 
@@ -557,9 +561,10 @@ els.grid.addEventListener('click', e => {
     // Lấy giá trị với fallback
     const price = item.dataset.price ? Number(item.dataset.price.replace('$', '')) * 23000 : 2070000; // Mặc định 90$ ≈ 2,070,000 VND
     const img = item.dataset.img || item.querySelector('img.main-image').src;
-    
+    const fallbackId = item.dataset.id || item.id || item.dataset.name || img;
+
     add({
-        id: item.dataset.id,
+        id: String(fallbackId),
         name: item.dataset.name,
         price: price,
         img: img

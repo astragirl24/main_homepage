@@ -394,7 +394,8 @@ i.shopping-bag-icon {
     border-right: 1px solid #ddd;
 }
 input[type="number"] {
-    -moz-appearance: textfield;
+  appearance: textfield;
+  -moz-appearance: textfield;
 }
 
 input[type="number"]::-webkit-outer-spin-button,
@@ -674,15 +675,15 @@ div.pro-gallery.one-row .gallery-horizontal-scroll-inner {
     transition: all .3s ease;
 }
 
-input {
-    display: none;
+.footer-gallery input[type="radio"] {
+  display: none;
 }
 
-input:checked + label {
+.footer-gallery input[type="radio"]:checked + label {
     width: 600px;
 }
 
-input:checked + label .description{
+.footer-gallery input[type="radio"]:checked + label .description{
     opacity: 1 !important;
     transform: translateY(e) !important;
 }
