@@ -173,7 +173,7 @@
                 </div>
                 <div class="grid" id="productGrid">
                     <div class="box" height="200px">
-                        <div class="item" id="sku-1" data-id="sku-1" data-name="VHS 13" data-price="$90.00" data-img="../images/VHS-20251004T101836Z-1-001/VHS/13.png">
+                        <div class="item" id="sku-1" data-name="VHS 13" data-price="$90.00" data-img="../images/VHS-20251004T101836Z-1-001/VHS/13.png">
                             <div class="thumb">
                                 <div class="hover-content">
                                     <ul>
@@ -193,7 +193,7 @@
                         </div>
                     </div>
                     <div class="box" height="200px">
-                        <div class="item" data-id="sku-2" data-name="Audio Vinyl 13" data-price="$90.00" data-img="../images/Audio-20251004T101842Z-1-001/Audio/Vinyl/13.png">
+                        <div class="item" data-id="sku-1" data-name="Audio Vinyl 13" data-price="$90.00" data-img="../images/Audio-20251004T101842Z-1-001/Audio/Vinyl/13.png">
                             <div class="thumb">
                                 <div class="hover-content">
                                     <ul>
@@ -313,7 +313,7 @@
                         </div>
                     </div>
                     <div class="box" height="200px">
-                        <div class="item" data-id="sku-8" data-name="Audio Vinyl 14" data-price="$90.00" data-img="../images/Audio-20251004T101842Z-1-001/Audio/Vinyl/14.png">
+                        <div class="item" data-id="sku-8" data-name="Audio Vinyl 14" data-img="../images/Audio-20251004T101842Z-1-001/Audio/Vinyl/14.png">
                             <div class="thumb">
                                 <div class="hover-content">
                                     <ul>
@@ -381,9 +381,8 @@
                     <div id="cartTitle" class="modal-title">GIỎ HÀNG</div>
                     <button class="x" id="closeModal" aria-label="Đóng"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" id="cartList">
                     <div class="empty" id="emptyState">Chưa có sản phẩm.</div>
-                    <div class="cart-lines" id="cartItems" role="list"></div>
                 </div>
                 <div class="modal-foot">
                     <div class="sum"><span>Tổng</span><span id="grandTotal">0₫</span></div>
@@ -394,37 +393,6 @@
                     <a href="#" class="continue" id="continueLink">TIẾP TỤC MUA HÀNG</a>
                 </div>
             </section>
-
-            <aside class="cart-tab" id="cartTab" aria-label="Giỏ hàng nhanh">
-                <button class="cart-tab-toggle" type="button" id="cartTabToggle" aria-expanded="false" aria-controls="cartTabPanel">
-                    <span class="cart-tab-icon" aria-hidden="true">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                            <path d="M6 6h15l-1.5 9h-12L5 2H2" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                            <circle cx="9" cy="21" r="1.8" fill="#111"></circle>
-                            <circle cx="18" cy="21" r="1.8" fill="#111"></circle>
-                        </svg>
-                    </span>
-                    <span class="cart-tab-label">Giỏ hàng</span>
-                    <span class="cart-tab-count" id="cartTabCount">0</span>
-                </button>
-                <div class="cart-tab-panel" id="cartTabPanel" hidden tabindex="-1">
-                    <div class="cart-tab-head">
-                        <h3>Giỏ hàng</h3>
-                        <button class="cart-tab-close" id="cartTabClose" aria-label="Đóng giỏ hàng nhanh"></button>
-                    </div>
-                    <div class="cart-tab-body">
-                        <div class="empty" id="cartTabEmpty">Chưa có sản phẩm.</div>
-                        <div class="cart-lines" id="cartTabItems" role="list"></div>
-                    </div>
-                    <div class="cart-tab-foot">
-                        <div class="sum"><span>Tổng</span><span id="cartTabTotal">0₫</span></div>
-                        <div class="cart-tab-actions">
-                            <button class="btn-retro ghost" type="button" id="cartTabViewFull">Xem chi tiết</button>
-                            <button class="btn-retro primary" type="button">Thanh toán</button>
-                        </div>
-                    </div>
-                </div>
-            </aside>
 
             <section class="vaultzone" aria-label="Khám phá theo danh mục">
                 <article class="artifactz vinora">
